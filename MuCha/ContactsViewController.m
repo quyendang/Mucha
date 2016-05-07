@@ -8,26 +8,77 @@
 
 #import "ContactsViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Friend.h"
+#import "FriendTableViewCell.h"
 
-@interface ContactsViewController ()
-
+@interface ContactsViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *friendTableView;
+@property (strong, nonatomic) NSMutableArray *dsFriends;
 @end
 
 @implementation ContactsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.friendTableView.dataSource = self;
+    self.friendTableView.delegate = self;
+    self.dsFriends = [[NSMutableArray alloc] init];
+    
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                  initWithGraphPath:@"me"
-                                  parameters:@{ @"fields" : @"friends"}
+                                  initWithGraphPath:@"/me/friends"
+                                  parameters:[NSDictionary dictionaryWithObject:@"id,name,link,first_name, last_name, picture.type(large)" forKey:@"fields"]
                                   HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                           id result,
                                           NSError *error) {
-        NSLog(@"%@", result);
-        // Handle the result
+        for (NSDictionary *dic in [result objectForKey:@"data"]) {
+            Friend *fr = [[Friend alloc] initWithDictionary:dic];
+            [self.dsFriends addObject:fr];
+        }
+        [self.friendTableView reloadData];
     }];
     // Do any additional setup after loading the view.
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSLog(@"count %ld", self.dsFriends.count);
+    return self.dsFriends.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    Friend *fr = [self.dsFriends objectAtIndex:indexPath.row];
+    FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"friend_cell"];
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@", fr.userFirstName, fr.userLastName];
+    cell.statusLabel.text = @"Ready to chat!";
+    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    //this will start the image loading in bg
+    dispatch_async(concurrentQueue, ^{
+        
+        NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:fr.userPicture]];
+        //this will set the image when loading is finished
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.avataImageView.image = [UIImage imageWithData:data];
+        });
+    });
+    cell.avataImageView.layer.cornerRadius = cell.avataImageView.layer.frame.size.height / 2;
+    cell.avataImageView.clipsToBounds = YES;
+    return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return @"A";
+    }
+    else if (section == 1){
+        return @"B";
+    }
+    else{
+        return @"C";
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{

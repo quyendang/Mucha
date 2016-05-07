@@ -44,13 +44,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if ([FBSDKAccessToken currentAccessToken] != nil) {
-        NSLog(@"Login");
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UITabBarController *view = [storyBoard instantiateViewControllerWithIdentifier:@"tab_main"];
-        [self.navigationController pushViewController:view animated:YES];
-    }
+    
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{

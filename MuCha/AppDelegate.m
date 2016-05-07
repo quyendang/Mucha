@@ -22,6 +22,13 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+    if ([FBSDKAccessToken currentAccessToken] != nil) {
+        NSLog(@"Login");
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *view = [storyBoard instantiateViewControllerWithIdentifier:@"nav_main"];
+        self.window.rootViewController = view;
+    }
+    
     // Override point for customization after application launch.
     return YES;
 }
