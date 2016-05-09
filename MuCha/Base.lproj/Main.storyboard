@@ -24,7 +24,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-157" y="271"/>
+            <point key="canvasLocation" x="-152" y="202"/>
         </scene>
         <!--Inbox-->
         <scene sceneID="NEx-M6-JWe">
@@ -37,11 +37,29 @@
                     <view key="view" contentMode="scaleToFill" id="8Gx-vi-pDH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qjl-8Q-uWP">
+                                <rect key="frame" x="8" y="72" width="307" height="286"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQy-SO-uAo">
+                                <rect key="frame" x="138" y="387" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="sendClick:" destination="egv-2W-ieO" eventType="touchUpInside" id="8SU-8c-lI2"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Inbox" image="icon_inbox.png" id="9n7-f3-Gfb"/>
                     <navigationItem key="navigationItem" id="QZu-Fg-iv4"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tnText" destination="qjl-8Q-uWP" id="kYw-K3-bcF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CXx-0F-nXK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

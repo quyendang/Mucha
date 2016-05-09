@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h1>Get Token from HTTP server</h1>
+        <form id="userForm">
+            <label>Username</label>
+            <input id="username" name="username"/>
+            <input type="submit"/>
+        </form>
+        <br>
+        <label>Token Generated: </label>
+        <input id="tokenGenerated" readonly/>
+        <br>
+        <br>
+        
+        <h1>Try to Connect To Websocket server with Token invalid</h1>
+        <label>Invalid Token</label>
+        <input id="invalidToken" value="Invalid_Token_123" readonly/>
+        <button id="invalidConnect">Connect</button>
+        <br>
+        <br>
+        
+        <h1>Try to Connect To Websocket server with <b>Token valid generated</b> in the first example, note that if the token input is empty, please generate a token running the first example.</h1>
+        <label>Valid Token:</label>
+        <input id="validToken" readonly/>
+        <button id="validConnect">Connect</button>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+        <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                              var socket;
+                              $('#userForm').submit(function (e) {
+                                                    var username = $('input[name=username]').val();
+                                                    if (!username) {
+                                                    alert('fill in a username first');
+                                                    return;
+                                                    }
+                                                    var user = {
+                                                    accessToken: $('input[name=username]').val()
+                                                    };
+                                                    $.ajax({
+                                                           type: 'POST',
+                                                           url: 'http://localhost:3000/api/login',
+                                                           data: user
+                                                           }).done(function (data) {
+                                                                   $('#tokenGenerated').val(data.token);
+                                                                   $('#validToken').val(data.token);
+                                                                   });
+                                                    e.preventDefault();
+                                                    });
+                              $('#invalidConnect').click(function () {
+                                                         var invalidToken = $('#invalidToken').val();
+                                                         socket = io.connect('http://localhost:3000', {
+                                                                             query: 'token=' + invalidToken,
+                                                                             forceNew: true
+                                                                             });
+                                                         socket.on('error', function (err) {
+                                                                   alert(JSON.stringify(err));
+                                                                   });
+                                                         });
+                              $('#validConnect').click(function () {
+                                                       var validToken = $('#validToken').val();
+                                                       if (!validToken) {
+                                                       alert('please run the first example.');
+                                                       return;
+                                                       }
+                                                       socket = io.connect('http://localhost:3000', {
+                                                                           query: 'token=' + validToken,
+                                                                           forceNew: true
+                                                                           });
+                                                       socket.on('connect', function (data) {
+                                                                 alert('you are now connected to the websocket server');
+                                                                 socket.emit('join','gshsjajshj');
+                                                                 });
+                                                       socket.on('error', function (err) {
+                                                                 alert(JSON.stringify(err));
+                                                                 });
+                                                       });
+                              
+                              });
+            </script>
+    </body>
+</html>

@@ -7,8 +7,11 @@
 //
 
 #import "InboxViewController.h"
+#import "ServiceManager.h"
+#import "DataManager.h"
 
-@interface InboxViewController ()
+@interface InboxViewController () <ServiceManagerDelegate>
+@property (weak, nonatomic) IBOutlet UITextView *tnText;
 
 @end
 
@@ -20,7 +23,12 @@
     self.tabBarController.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
     [self.tabBarController.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
+    [ServiceManager shareInstance].delegate = self;
     // Do any additional setup after loading the view.
+}
+
+- (void)socketIO:(SIOSocket *)socket callBackString:(NSString *)messeage{
+    NSLog(@"%@", messeage);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -28,8 +36,19 @@
     self.tabBarController.navigationItem.backBarButtonItem = nil;
     self.tabBarController.navigationItem.hidesBackButton = YES;
     self.tabBarController.title = @"Recents";
+    if ([DataManager shareInstance].token == nil) {
+        [[DataManager shareInstance] getUserToken];
+    }
+    
+    if (![ServiceManager shareInstance].isLogin) {
+        [[ServiceManager shareInstance] connectToHostWithToken:[DataManager shareInstance].token];
+    }
+    
 }
 
+- (IBAction)sendClick:(id)sender {
+    [[ServiceManager shareInstance] sendMessage:@"Test test"];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

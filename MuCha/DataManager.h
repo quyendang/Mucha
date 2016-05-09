@@ -17,8 +17,10 @@
 @interface DataManager : NSObject
 @property (strong, nonatomic) NSMutableArray *topMusics;
 @property (strong, nonatomic) id<DataManagerDelegate> delegate;
+@property (strong, nonatomic) NSString *token;
 - (void)loadTopMusic;
 - (void)searchWithKey:(NSString *)key;
 + (DataManager *)shareInstance;
-
+- (void)getConnectTokenFromAccessToken:(NSString *)token;
+- (void)getUserToken;
 @end

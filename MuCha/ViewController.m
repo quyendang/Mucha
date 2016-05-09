@@ -10,7 +10,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "InboxViewController.h"
-
+#import "DataManager.h"
 @interface ViewController () <FBSDKLoginButtonDelegate>
 @property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginFBButton;
 
@@ -38,6 +38,7 @@
         NSLog(@"Login ok!");
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UITabBarController *view = [storyBoard instantiateViewControllerWithIdentifier:@"tab_main"];
+        [[DataManager shareInstance] getConnectTokenFromAccessToken:[FBSDKAccessToken currentAccessToken].tokenString];
         [self.navigationController pushViewController:view animated:YES];
     }
 }
