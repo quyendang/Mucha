@@ -12,6 +12,7 @@
 
 @interface InboxViewController () <ServiceManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *tnText;
+@property (weak, nonatomic) IBOutlet UILabel *inbox;
 
 @end
 
@@ -19,16 +20,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [DataManager shareInstance].musicLists = [[NSMutableArray alloc] init];
     [self.tabBarController.navigationController.navigationBar setTranslucent:NO];
     self.tabBarController.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
     [self.tabBarController.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
     [ServiceManager shareInstance].delegate = self;
+    [[DataManager shareInstance] getUserAvataUrl];
     // Do any additional setup after loading the view.
 }
 
 - (void)socketIO:(SIOSocket *)socket callBackString:(NSString *)messeage{
     NSLog(@"%@", messeage);
+    dispatch_async(dispatch_get_main_queue(), ^{
+       self.inbox.text = messeage;
+        self.tnText.text = [NSString stringWithFormat:@"%@ \n %@", self.tnText.text, messeage];
+    });
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -47,7 +55,15 @@
 }
 
 - (IBAction)sendClick:(id)sender {
-    [[ServiceManager shareInstance] sendMessage:@"Test test"];
+    NSMutableDictionary *mess = [[NSMutableDictionary alloc] init];
+    [mess setValue:@"837004196443415" forKey:@"userid"];
+    [mess setValue:@"Xin Chao!" forKey:@"message"];
+    NSError *er;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:mess options:NSJSONWritingPrettyPrinted error:&er];
+    NSString *tn = [[NSString alloc] initWithData:data encoding:NSJSONReadingAllowFragments
+                    ];
+    NSLog(@"%@", tn);
+    [[ServiceManager shareInstance] sendMessage:@"{\"senderid\" : \"323456566545\", \"userid\" : \"837004196443415\",\"message\" : \"Xin Chao!\"}"];
 }
 
 - (void)didReceiveMemoryWarning {

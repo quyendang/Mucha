@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *avataImageView;
@@ -27,7 +28,9 @@
                 NSString *nameOfLoginUser = [result valueForKey:@"name"];
                 NSString *imageStringOfLoginUser = [[[result valueForKey:@"picture"] valueForKey:@"data"] valueForKey:@"url"];
                 self.nameLabel.text = nameOfLoginUser;
-                self.avataImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageStringOfLoginUser]]];
+                [self.avataImageView sd_setImageWithURL:[NSURL URLWithString:imageStringOfLoginUser] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    [self.avataImageView setNeedsLayout];
+                }];
                 self.avataImageView.layer.cornerRadius = self.avataImageView.layer.frame.size.width / 2;
                 self.avataImageView.clipsToBounds = YES;
             }

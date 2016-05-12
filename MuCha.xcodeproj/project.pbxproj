@@ -35,7 +35,13 @@
 		489DB26E1CD7317D0074B0E2 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489DB26B1CD7317D0074B0E2 /* FBSDKShareKit.framework */; };
 		489DB2711CD7356A0074B0E2 /* icon_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 489DB2701CD7356A0074B0E2 /* icon_logo.png */; };
 		4A02A39D1CE05CD900EDC8C5 /* server in Resources */ = {isa = PBXBuildFile; fileRef = 4A02A39C1CE05CD900EDC8C5 /* server */; };
+		4A27573E1CE4884E007DFD01 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27573D1CE4884E007DFD01 /* ChatViewController.m */; };
+		4A2757411CE48B01007DFD01 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2757401CE48B01007DFD01 /* ChatTableViewCell.m */; };
+		4A2757441CE48D9D007DFD01 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2757431CE48D9D007DFD01 /* Message.m */; };
+		4A2757481CE4D312007DFD01 /* ConectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2757471CE4D312007DFD01 /* ConectTableViewCell.m */; };
+		4A27574B1CE4D3BB007DFD01 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27574A1CE4D3BB007DFD01 /* Room.m */; };
 		4A63AFF61CDDBD470072C4F8 /* ServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A63AFF51CDDBD470072C4F8 /* ServiceManager.m */; };
+		4A7D85E41CE3938A0066B884 /* music_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A7D85E31CE3938A0066B884 /* music_placeholder.png */; };
 		4AAB8B731CDD0E0100223613 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAB8B721CDD0E0100223613 /* FriendTableViewCell.m */; };
 		4AAB8B761CDD0ED100223613 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAB8B751CDD0ED100223613 /* Friend.m */; };
 /* End PBXBuildFile section */
@@ -81,8 +87,20 @@
 		489DB26B1CD7317D0074B0E2 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		489DB2701CD7356A0074B0E2 /* icon_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_logo.png; sourceTree = "<group>"; };
 		4A02A39C1CE05CD900EDC8C5 /* server */ = {isa = PBXFileReference; lastKnownFileType = folder; path = server; sourceTree = "<group>"; };
+		4A27573C1CE4884E007DFD01 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		4A27573D1CE4884E007DFD01 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		4A27573F1CE48B01007DFD01 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
+		4A2757401CE48B01007DFD01 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
+		4A2757421CE48D9D007DFD01 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		4A2757431CE48D9D007DFD01 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		4A2757461CE4D312007DFD01 /* ConectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConectTableViewCell.h; sourceTree = "<group>"; };
+		4A2757471CE4D312007DFD01 /* ConectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConectTableViewCell.m; sourceTree = "<group>"; };
+		4A2757491CE4D3BB007DFD01 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
+		4A27574A1CE4D3BB007DFD01 /* Room.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Room.m; sourceTree = "<group>"; };
 		4A63AFF41CDDBD470072C4F8 /* ServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceManager.h; sourceTree = "<group>"; };
 		4A63AFF51CDDBD470072C4F8 /* ServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceManager.m; sourceTree = "<group>"; };
+		4A7D85D81CE385E10066B884 /* MuCha-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MuCha-Bridging-Header.h"; sourceTree = "<group>"; };
+		4A7D85E31CE3938A0066B884 /* music_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_placeholder.png; sourceTree = "<group>"; };
 		4AAB8B711CDD0E0100223613 /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		4AAB8B721CDD0E0100223613 /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		4AAB8B741CDD0ED100223613 /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
@@ -138,13 +156,9 @@
 				489DB2101CD605EA0074B0E2 /* Supporting Files */,
 				489DB2331CD611270074B0E2 /* Views */,
 				489DB25E1CD62AA70074B0E2 /* Cells */,
-				489DB2631CD63F470074B0E2 /* DataManager.h */,
-				489DB2641CD63F470074B0E2 /* DataManager.m */,
-				489DB2661CD640370074B0E2 /* Music.h */,
-				489DB2671CD640370074B0E2 /* Music.m */,
-				4AAB8B741CDD0ED100223613 /* Friend.h */,
-				4AAB8B751CDD0ED100223613 /* Friend.m */,
+				4A2757451CE48DA7007DFD01 /* ViewModel */,
 				4A63AFF71CDDBD4F0072C4F8 /* Managers */,
+				4A7D85D81CE385E10066B884 /* MuCha-Bridging-Header.h */,
 			);
 			path = MuCha;
 			sourceTree = "<group>";
@@ -172,6 +186,8 @@
 				489DB2311CD6111E0074B0E2 /* ProfileViewController.m */,
 				489DB2561CD624830074B0E2 /* MusicViewController.h */,
 				489DB2571CD624830074B0E2 /* MusicViewController.m */,
+				4A27573C1CE4884E007DFD01 /* ChatViewController.h */,
+				4A27573D1CE4884E007DFD01 /* ChatViewController.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -179,6 +195,7 @@
 		489DB2531CD616170074B0E2 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				4A7D85E31CE3938A0066B884 /* music_placeholder.png */,
 				489DB2701CD7356A0074B0E2 /* icon_logo.png */,
 				489DB2611CD62EEC0074B0E2 /* icon_back.png */,
 				489DB25F1CD62DC30074B0E2 /* taylor.jpg */,
@@ -199,6 +216,10 @@
 				489DB25C1CD62A9F0074B0E2 /* MusicTableViewCell.m */,
 				4AAB8B711CDD0E0100223613 /* FriendTableViewCell.h */,
 				4AAB8B721CDD0E0100223613 /* FriendTableViewCell.m */,
+				4A27573F1CE48B01007DFD01 /* ChatTableViewCell.h */,
+				4A2757401CE48B01007DFD01 /* ChatTableViewCell.m */,
+				4A2757461CE4D312007DFD01 /* ConectTableViewCell.h */,
+				4A2757471CE4D312007DFD01 /* ConectTableViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -214,9 +235,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4A2757451CE48DA7007DFD01 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A2757431CE48D9D007DFD01 /* Message.m */,
+				4A2757421CE48D9D007DFD01 /* Message.h */,
+				489DB2661CD640370074B0E2 /* Music.h */,
+				489DB2671CD640370074B0E2 /* Music.m */,
+				4AAB8B741CDD0ED100223613 /* Friend.h */,
+				4AAB8B751CDD0ED100223613 /* Friend.m */,
+				4A2757491CE4D3BB007DFD01 /* Room.h */,
+				4A27574A1CE4D3BB007DFD01 /* Room.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
 		4A63AFF71CDDBD4F0072C4F8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				489DB2631CD63F470074B0E2 /* DataManager.h */,
+				489DB2641CD63F470074B0E2 /* DataManager.m */,
 				4A63AFF41CDDBD470072C4F8 /* ServiceManager.h */,
 				4A63AFF51CDDBD470072C4F8 /* ServiceManager.m */,
 			);
@@ -261,12 +299,13 @@
 		489DB2051CD605EA0074B0E2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Quyen Dang";
 				TargetAttributes = {
 					489DB20C1CD605EA0074B0E2 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = FHH8YL5JEV;
+						DevelopmentTeam = MMMG6T3Z8H;
 					};
 				};
 			};
@@ -301,6 +340,7 @@
 				489DB21D1CD605EA0074B0E2 /* Assets.xcassets in Resources */,
 				489DB2621CD62EEC0074B0E2 /* icon_back.png in Resources */,
 				489DB2511CD6160F0074B0E2 /* icon_inbox.png in Resources */,
+				4A7D85E41CE3938A0066B884 /* music_placeholder.png in Resources */,
 				489DB25A1CD6264D0074B0E2 /* icon_play.png in Resources */,
 				489DB2521CD6160F0074B0E2 /* icon_setting.png in Resources */,
 				489DB2501CD6160F0074B0E2 /* icon_contacts.png in Resources */,
@@ -365,18 +405,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				489DB2581CD624830074B0E2 /* MusicViewController.m in Sources */,
+				4A2757411CE48B01007DFD01 /* ChatTableViewCell.m in Sources */,
 				4AAB8B761CDD0ED100223613 /* Friend.m in Sources */,
+				4A27573E1CE4884E007DFD01 /* ChatViewController.m in Sources */,
 				489DB2651CD63F470074B0E2 /* DataManager.m in Sources */,
 				489DB2181CD605EA0074B0E2 /* ViewController.m in Sources */,
 				489DB22F1CD6110D0074B0E2 /* ConnectViewController.m in Sources */,
 				4A63AFF61CDDBD470072C4F8 /* ServiceManager.m in Sources */,
 				489DB2151CD605EA0074B0E2 /* AppDelegate.m in Sources */,
+				4A2757481CE4D312007DFD01 /* ConectTableViewCell.m in Sources */,
 				489DB25D1CD62A9F0074B0E2 /* MusicTableViewCell.m in Sources */,
 				489DB2681CD640370074B0E2 /* Music.m in Sources */,
 				4AAB8B731CDD0E0100223613 /* FriendTableViewCell.m in Sources */,
 				489DB22C1CD610F30074B0E2 /* ContactsViewController.m in Sources */,
+				4A2757441CE48D9D007DFD01 /* Message.m in Sources */,
 				489DB2321CD6111E0074B0E2 /* ProfileViewController.m in Sources */,
 				489DB2121CD605EA0074B0E2 /* main.m in Sources */,
+				4A27574B1CE4D3BB007DFD01 /* Room.m in Sources */,
 				489DB2291CD610DC0074B0E2 /* InboxViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +533,9 @@
 			baseConfigurationReference = DEC1E7C5AEA834433967A5D9 /* Pods-MuCha.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -497,6 +545,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vltudio.MuCha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MuCha/MuCha-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -505,6 +556,9 @@
 			baseConfigurationReference = A658DB02599E12CCA2371845 /* Pods-MuCha.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -514,6 +568,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vltudio.MuCha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MuCha/MuCha-Bridging-Header.h";
 			};
 			name = Release;
 		};

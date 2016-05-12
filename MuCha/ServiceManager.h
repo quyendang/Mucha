@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <SIOSocket.h>
+#import "Music.h"
 @class ServiceManager;
 @protocol ServiceManagerDelegate <NSObject>
 
 - (void)socketIO:(SIOSocket *)socket callBackString:(NSString *)messeage;
-
+- (void)socketIO:(SIOSocket *)socket callBackRoomString:(NSString *)data;
 @end
 @interface ServiceManager : NSObject
 @property (strong, nonatomic) SIOSocket *socketIO;
@@ -21,4 +22,5 @@
 + (ServiceManager *)shareInstance;
 - (void)connectToHostWithToken:(NSString *)token;
 - (void)sendMessage:(NSString *)mess;
+- (void)createRoomWithMusicId:(NSString *)musicId currentUserId:(NSString *)userId;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "Music.h"
+#import "DataManager.h"
 
 @implementation Music
 - (instancetype)initWithDictionary:(NSDictionary *)dic{
@@ -17,12 +18,17 @@
         self.username = [[dic objectForKey:@"user"] objectForKey:@"username"];
         self.avataUrl = [[dic objectForKey:@"user"] objectForKey:@"avatar_url"];
         self.streamUrl = [dic objectForKey:@"stream_url"];
-        dispatch_queue_t que = dispatch_queue_create("Load Image", nil);
-        dispatch_async(que, ^{
-            self.data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.avataUrl]];
-        });
+        self.musicId = [dic objectForKey:@"id"];
     }
     
+    return self;
+}
+
+- (instancetype)initWithMusicId:(NSString *)musicId{
+    self = [super init];
+    if (self) {
+        self = [[DataManager shareInstance] musicById:musicId];
+    }
     return self;
 }
 @end

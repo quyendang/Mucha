@@ -19,7 +19,7 @@
 
 - (void)getConnectTokenFromAccessToken:(NSString *)token{
     NSDictionary *req = [NSDictionary dictionaryWithObject:token forKey:@"accessToken"];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://localhost:3000/api/login"]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://192.168.1.87:3000/api/login"]];
     [request setHTTPMethod:@"POST"];
     NSData *datapost = [NSJSONSerialization dataWithJSONObject:req options:0 error:nil];
     [request setHTTPBody:datapost];
@@ -51,7 +51,24 @@
     }
 }
 
+- (void)getUserAvataUrl{
+    if ([FBSDKAccessToken currentAccessToken]) {
+        [[[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,name,picture.width(100).height(100)"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+            if (!error) {
+                //NSString *nameOfLoginUser = [result valueForKey:@"name"];
+                self.avatarUrl = [[[result valueForKey:@"picture"] valueForKey:@"data"] valueForKey:@"url"];
+            }
+        }];
+    }
+}
 
+- (Music *)musicById:(NSString *)musicId{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.soundcloud.com/tracks/%@?client_id=48e42f21de4a98b9ab09d24ceb40dcf3", musicId]]];
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSError *jsonParsingError = nil;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonParsingError];
+    return [[Music alloc] initWithDictionary:dic];
+}
 
 - (void)searchWithKey:(NSString *)key{
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.soundcloud.com/tracks?client_id=48e42f21de4a98b9ab09d24ceb40dcf3&q=%@",[key stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]]]];

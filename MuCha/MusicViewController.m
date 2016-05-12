@@ -10,8 +10,12 @@
 #import "MusicTableViewCell.h"
 #import "DataManager.h"
 #import "Music.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "ServiceManager.h"
+#import "Room.h"
+#import <SBJson4.h>
 
-@interface MusicViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DataManagerDelegate>
+@interface MusicViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DataManagerDelegate, ServiceManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *musicTableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @end
@@ -25,6 +29,29 @@
     self.musicTableView.dataSource = self;
     self.searchTextField.delegate = self;
     self.searchTextField.returnKeyType = UIReturnKeySearch;
+}
+
+- (void)socketIO:(SIOSocket *)socket callBackRoomString:(NSString *)data{
+    NSLog(@"%@", data);
+    [[DataManager shareInstance].musicLists removeAllObjects];
+    NSError *err;
+    NSData *jsonData = [data dataUsingEncoding:NSUTF8StringEncoding];
+    NSArray *musicArr = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+    for (NSDictionary *dic in musicArr) {
+        Room *room = [[Room alloc] initWithDictionary:dic];
+        [[DataManager shareInstance].musicLists addObject:room];
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(serverResponseRoom)]){
+        [self.delegate serverResponseRoom];
+    }
+    
+    [self popViewControllerAnimated];
+}
+
+- (void)socketIO:(SIOSocket *)socket callBackString:(NSString *)messeage{
+    NSLog(@"%@", messeage);
+    [DataManager shareInstance].haveARoom = YES;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
@@ -52,6 +79,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [ServiceManager shareInstance].delegate = self;
     self.title = @"Search a song";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"icon_back.png"] forState:UIControlStateNormal];
@@ -96,19 +124,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MusicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"music_cell"];
     Music *music = [[DataManager shareInstance].topMusics objectAtIndex:indexPath.row];
-    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    //this will start the image loading in bg
-    dispatch_async(concurrentQueue, ^{
-        
-        if (music.data == nil) {
-            music.data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:music.avataUrl]];
-        }
-        //this will set the image when loading is finished
-        dispatch_async(dispatch_get_main_queue(), ^{
-            cell.thumbImageView.image = [UIImage imageWithData:music.data];
-        });
-    });
-    cell.thumbImageView.image = [UIImage imageWithData:music.data];
+    [cell.thumbImageView sd_setImageWithURL:[NSURL URLWithString:music.avataUrl] placeholderImage:[UIImage imageNamed:@"music_placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [cell setNeedsLayout];
+    }];
     cell.thumbImageView.layer.cornerRadius = cell.thumbImageView.layer.frame.size.width / 2;
     cell.thumbImageView.clipsToBounds = YES;
     cell.nameLabel.text = music.title;
@@ -116,6 +134,16 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (![DataManager shareInstance].haveARoom) {
+        Music *music = [[DataManager shareInstance].topMusics objectAtIndex:indexPath.row];
+        [[ServiceManager shareInstance] createRoomWithMusicId:music.musicId currentUserId:[FBSDKAccessToken currentAccessToken].userID];
+        //Music *m = [[DataManager shareInstance] musicById:music.musicId];
+        //NSLog(@"%@", m.avataUrl);
+    }else{
+        NSLog(@"You are have a room !");
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

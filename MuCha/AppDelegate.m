@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "DataManager.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +19,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [DataManager shareInstance].haveARoom = NO;
     [FBSDKLoginButton class];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[FBSDKApplicationDelegate sharedInstance] application:application
@@ -26,7 +28,7 @@
         NSLog(@"Login");
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UINavigationController *view = [storyBoard instantiateViewControllerWithIdentifier:@"nav_main"];
-        //self.window.rootViewController = view;
+        self.window.rootViewController = view;
     }
     
     // Override point for customization after application launch.

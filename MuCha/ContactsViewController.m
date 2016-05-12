@@ -10,6 +10,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "Friend.h"
 #import "FriendTableViewCell.h"
+#import "ServiceManager.h"
+#import "ChatViewController.h"
 
 @interface ContactsViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *friendTableView;
@@ -68,6 +70,15 @@
     cell.avataImageView.clipsToBounds = YES;
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Friend *fr = [self.dsFriends objectAtIndex:indexPath.row];
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChatViewController *view = [storyBoard instantiateViewControllerWithIdentifier:@"chat"];
+    view.fr = fr;
+    [self.tabBarController.navigationController pushViewController:view animated:YES];
+}
+
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section == 0) {

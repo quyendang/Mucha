@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MusicViewController;
 
+@protocol MusicViewControllerDelegate <NSObject>
+- (void)serverResponseRoom;
+@end
 @interface MusicViewController : UIViewController
-
+@property (strong, nonatomic) id<MusicViewControllerDelegate> delegate;
 @end
