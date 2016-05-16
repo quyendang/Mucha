@@ -14,7 +14,7 @@
     self = [super init];
     if (self) {
         self.roomId = [dic objectForKey:@"roomid"];
-        self.music = [[Music alloc] initWithMusicId:[dic objectForKey:@"musicid"]];
+        self.music = [[Music alloc] initWithDataDictionary:dic];
         self.firstUser = [dic objectForKey:@"user1"];
         self.secondUser = [dic objectForKey:@"user2"];
     }

@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Lato-Hairline.ttf</string>
+		<string>Lato-Light.ttf</string>
+		<string>Lato-Thin.ttf</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -43,22 +49,22 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb1140599975970451</string>
-            </array>
-        </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>1140599975970451</string>
-    <key>FacebookDisplayName</key>
-    <string>Perfect Chat</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbauth2</string>
-    </array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1140599975970451</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1140599975970451</string>
+	<key>FacebookDisplayName</key>
+	<string>Perfect Chat</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbauth2</string>
+	</array>
 </dict>
 </plist>

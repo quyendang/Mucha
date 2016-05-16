@@ -27,13 +27,21 @@ function Room()
     this.user2 = '';
     this.roomid = '';
     this.musicid = '';
+    this.title = '';
+    this.username = '';
+    this.avataUrl = '';
+    this.streamUrl = '';
     return this;
 }
-Room.prototype.setInfo = function(user1, user2, roomid, musicid){
+Room.prototype.setInfo = function(user1, user2, roomid, musicid, title, username, avataUrl, streamUrl){
     this.user1 = user1;
     this.user2 = user2;
     this.roomid = roomid;
     this.musicid = musicid;
+    this.title = title;
+    this.username = username;
+    this.avataUrl = avataUrl;
+    this.streamUrl = streamUrl;
 };
 
 Array.prototype.getIemtByParam = function(paramPair) {
@@ -123,7 +131,7 @@ io.on('connection', function (socket) {
       socket.on('createroom', function(data){
                   var t = JSON.parse(data);
                 var room = new Room();
-                room.setInfo(t['user1'], t['user2'], t['roomid'], t['musicid']);
+                room.setInfo(t['user1'], t['user2'], t['roomid'], t['musicid'], t['title'], t['username'], t['avataUrl'], t['streamUrl']);
                 rooms.push(room);
                 console.log(data);
                 io.sockets.emit('room', JSON.stringify(rooms));

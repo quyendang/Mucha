@@ -27,8 +27,23 @@
 - (instancetype)initWithMusicId:(NSString *)musicId{
     self = [super init];
     if (self) {
-        self = [[DataManager shareInstance] musicById:musicId];
+        //self = [[DataManager shareInstance] musicById:musicId];
+        self.musicId = musicId;
     }
+    return self;
+}
+
+- (instancetype)initWithDataDictionary:(NSDictionary *)dic{
+    self = [super init];
+    if (self) {
+        self.title = [dic objectForKey:@"title"];
+        //NSLog(@"%@", self.title);
+        self.username = [dic objectForKey:@"username"];
+        self.avataUrl = [dic objectForKey:@"avataUrl"];
+        self.streamUrl = [dic objectForKey:@"streamUrl"];
+        self.musicId = [dic objectForKey:@"musicid"];
+    }
+    
     return self;
 }
 @end

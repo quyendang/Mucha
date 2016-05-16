@@ -22,5 +22,5 @@
 + (ServiceManager *)shareInstance;
 - (void)connectToHostWithToken:(NSString *)token;
 - (void)sendMessage:(NSString *)mess;
-- (void)createRoomWithMusicId:(NSString *)musicId currentUserId:(NSString *)userId;
+- (void)createRoomWithMusic:(Music *)music currentUserId:(NSString *)userId;
 @end

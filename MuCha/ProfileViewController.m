@@ -7,10 +7,12 @@
 //
 
 #import "ProfileViewController.h"
+#import "ViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <FBSDKLoginButtonDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *avataImageView;
 @property (weak, nonatomic) IBOutlet FBSDKButton *logoutButton;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -21,7 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     if ([FBSDKAccessToken currentAccessToken]) {
         [[[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,name,picture.width(100).height(100)"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
             if (!error) {
@@ -36,6 +37,12 @@
             }
         }];
     }
+}
+
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ViewController *view = [storyBoard instantiateViewControllerWithIdentifier:@"login"];
+    [self.tabBarController.navigationController pushViewController:view animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

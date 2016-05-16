@@ -45,8 +45,10 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(serverResponseRoom)]){
         [self.delegate serverResponseRoom];
     }
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [self popViewControllerAnimated];
+    });
     
-    [self popViewControllerAnimated];
 }
 
 - (void)socketIO:(SIOSocket *)socket callBackString:(NSString *)messeage{
@@ -137,7 +139,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (![DataManager shareInstance].haveARoom) {
         Music *music = [[DataManager shareInstance].topMusics objectAtIndex:indexPath.row];
-        [[ServiceManager shareInstance] createRoomWithMusicId:music.musicId currentUserId:[FBSDKAccessToken currentAccessToken].userID];
+        [[ServiceManager shareInstance] createRoomWithMusic:music currentUserId:[FBSDKAccessToken currentAccessToken].userID];
         //Music *m = [[DataManager shareInstance] musicById:music.musicId];
         //NSLog(@"%@", m.avataUrl);
     }else{

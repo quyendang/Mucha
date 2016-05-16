@@ -17,4 +17,5 @@
 @property (strong, nonatomic) NSData *data;
 - (instancetype)initWithDictionary:(NSDictionary *)dic;
 - (instancetype)initWithMusicId:(NSString *)musicId;
+- (instancetype)initWithDataDictionary:(NSDictionary *)dic;
 @end

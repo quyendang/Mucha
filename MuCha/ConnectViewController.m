@@ -104,7 +104,10 @@
 
 - (void)serverResponseRoom{
     NSLog(@"refresh");
-    [self.musicTableView reloadData];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [self.musicTableView reloadData];
+    });
+    
 }
 
 - (void)onClickMusicButton{

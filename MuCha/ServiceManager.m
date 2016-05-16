@@ -23,7 +23,7 @@
 }
 
 - (void)connectToHostWithToken:(NSString *)token{
-    [SIOSocket socketWithHost:[NSString stringWithFormat:@"http://192.168.1.87:3000/?token=%@", token] response: ^(SIOSocket *socket) {
+    [SIOSocket socketWithHost:[NSString stringWithFormat:@"http://quyen23.cloudapp.net:3000/?token=%@", token] response: ^(SIOSocket *socket) {
         self.socketIO = socket;
         self.socketIO.onConnect = ^(){
             NSLog(@"User connected");
@@ -65,9 +65,9 @@
     [self.socketIO emit: @"join" args: @[userID]];
 }
 
-- (void)createRoomWithMusicId:(NSString *)musicId currentUserId:(NSString *)userId{
+- (void)createRoomWithMusic:(Music *)music currentUserId:(NSString *)userId{
     
-    NSString *data = [NSString stringWithFormat:@"{\"roomid\" : \"%@\", \"user1\" : \"%@\",\"user2\" : \"%@\" , \"musicid\" : \"%@\" }", [NSString stringWithFormat:@"%@+%@", musicId, userId], userId, @"emty", musicId];
+    NSString *data = [NSString stringWithFormat:@"{\"roomid\" : \"%@\", \"user1\" : \"%@\",\"user2\" : \"%@\" , \"musicid\" : \"%@\", \"title\" : \"%@\",\"username\" : \"%@\",\"avataUrl\" : \"%@\", \"streamUrl\" : \"%@\" }", [NSString stringWithFormat:@"%@+%@", music.musicId, userId], userId, @"emty", music.musicId, music.title, music.username, music.avataUrl, music.streamUrl];
     [self.socketIO emit: @"createroom" args: @[data]];
 }
 @end

@@ -12,6 +12,7 @@
 #import "FriendTableViewCell.h"
 #import "ServiceManager.h"
 #import "ChatViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ContactsViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *friendTableView;
@@ -43,7 +44,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -55,19 +56,12 @@
     Friend *fr = [self.dsFriends objectAtIndex:indexPath.row];
     FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"friend_cell"];
     cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@", fr.userFirstName, fr.userLastName];
+    //cell.nameLabel.font = [UIFont fontWithName:@"Lato-Thin" size:17];
     cell.statusLabel.text = @"Ready to chat!";
-    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    //this will start the image loading in bg
-    dispatch_async(concurrentQueue, ^{
-        
-        NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:fr.userPicture]];
-        //this will set the image when loading is finished
-        dispatch_async(dispatch_get_main_queue(), ^{
-            cell.avataImageView.image = [UIImage imageWithData:data];
-        });
-    });
-    cell.avataImageView.layer.cornerRadius = cell.avataImageView.layer.frame.size.height / 2;
-    cell.avataImageView.clipsToBounds = YES;
+    [cell.avataImageView sd_setImageWithURL:[NSURL URLWithString:fr.userPicture] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        cell.avataImageView.layer.cornerRadius = cell.avataImageView.layer.frame.size.height / 2;
+        cell.avataImageView.clipsToBounds = YES;
+    }];
     return cell;
 }
 
@@ -82,7 +76,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return @"A";
+        return @"Facebook Friends";
     }
     else if (section == 1){
         return @"B";

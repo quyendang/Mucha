@@ -9,6 +9,7 @@
 #import "InboxViewController.h"
 #import "ServiceManager.h"
 #import "DataManager.h"
+#import "Room.h"
 
 @interface InboxViewController () <ServiceManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *tnText;
@@ -37,6 +38,16 @@
         self.tnText.text = [NSString stringWithFormat:@"%@ \n %@", self.tnText.text, messeage];
     });
     
+}
+- (void)socketIO:(SIOSocket *)socket callBackRoomString:(NSString *)data{
+    [[DataManager shareInstance].musicLists removeAllObjects];
+    NSError *err;
+    NSData *jsonData = [data dataUsingEncoding:NSUTF8StringEncoding];
+    NSArray *musicArr = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+    for (NSDictionary *dic in musicArr) {
+        Room *room = [[Room alloc] initWithDictionary:dic];
+        [[DataManager shareInstance].musicLists addObject:room];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{

@@ -19,7 +19,7 @@
 
 - (void)getConnectTokenFromAccessToken:(NSString *)token{
     NSDictionary *req = [NSDictionary dictionaryWithObject:token forKey:@"accessToken"];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://192.168.1.87:3000/api/login"]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://quyen23.cloudapp.net:3000/api/login"]];
     [request setHTTPMethod:@"POST"];
     NSData *datapost = [NSJSONSerialization dataWithJSONObject:req options:0 error:nil];
     [request setHTTPBody:datapost];
@@ -36,6 +36,7 @@
 }
 
 - (void)loadTopMusic{
+    self.haveARoom = NO;
     self.topMusics = [[NSMutableArray alloc] init];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://api.soundcloud.com/tracks?client_id=48e42f21de4a98b9ab09d24ceb40dcf3"]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
