@@ -14,10 +14,13 @@
 #import "ServiceManager.h"
 #import "Room.h"
 #import <SBJson4.h>
+@import AVFoundation;
+#import <DGActivityIndicatorView.h>
 
 @interface MusicViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DataManagerDelegate, ServiceManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *musicTableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
+@property (strong, nonatomic) DGActivityIndicatorView *activityIndicatorView;
 @end
 
 @implementation MusicViewController
@@ -29,6 +32,12 @@
     self.musicTableView.dataSource = self;
     self.searchTextField.delegate = self;
     self.searchTextField.returnKeyType = UIReturnKeySearch;
+    self.activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:DGActivityIndicatorAnimationTypeCookieTerminator tintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
+    CGFloat width = self.view.bounds.size.width / 5.0f;
+    CGFloat height = self.view.bounds.size.height / 7.0f;
+    self.activityIndicatorView.frame = CGRectMake(20.0f, 20.0f, width, height);
+    [self.view addSubview:self.activityIndicatorView];
+    [self.activityIndicatorView startAnimating];
 }
 
 - (void)socketIO:(SIOSocket *)socket callBackRoomString:(NSString *)data{
@@ -66,12 +75,13 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
-    
+    self.activityIndicatorView.hidden = NO;
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     //this will start the image loading in bg
     dispatch_async(concurrentQueue, ^{
         [[DataManager shareInstance] searchWithKey:self.searchTextField.text];
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.activityIndicatorView.hidden = YES;
             [self.musicTableView reloadData];
         });
     });
@@ -97,11 +107,13 @@
     //this will start the image loading in bg
     dispatch_async(concurrentQueue, ^{
         if ([DataManager shareInstance].topMusics.count == 0) {
+            self.activityIndicatorView.hidden = NO;
             [[DataManager shareInstance] loadTopMusic];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.musicTableView reloadData];
+            self.activityIndicatorView.hidden = YES;
         });
     });
 }
@@ -142,6 +154,7 @@
         [[ServiceManager shareInstance] createRoomWithMusic:music currentUserId:[FBSDKAccessToken currentAccessToken].userID];
         //Music *m = [[DataManager shareInstance] musicById:music.musicId];
         //NSLog(@"%@", m.avataUrl);
+        
     }else{
         NSLog(@"You are have a room !");
     }

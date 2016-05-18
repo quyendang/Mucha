@@ -11,6 +11,8 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "DataManager.h"
 #import "Room.h"
+#import "ChatViewController.h"
+#import "Recent.h"
 
 @implementation ServiceManager
 + (ServiceManager *)shareInstance{
@@ -23,6 +25,7 @@
 }
 
 - (void)connectToHostWithToken:(NSString *)token{
+    [DataManager shareInstance].recentChats = [[NSMutableArray alloc] init];
     [SIOSocket socketWithHost:[NSString stringWithFormat:@"http://quyen23.cloudapp.net:3000/?token=%@", token] response: ^(SIOSocket *socket) {
         self.socketIO = socket;
         self.socketIO.onConnect = ^(){
@@ -32,23 +35,21 @@
         };
         [self.socketIO on: @"chat" callback: ^(SIOParameterArray *args)
          {
-             if (self.delegate && [self.delegate respondsToSelector:@selector(socketIO:callBackString:)]) {
+             if ([self.delegate isKindOfClass:[ChatViewController class]] && self.delegate && [self.delegate respondsToSelector:@selector(socketIO:callBackString:)]) {
                  [self.delegate socketIO:self.socketIO callBackString:[args firstObject]];
              }else{
-                 [[DataManager shareInstance].musicLists removeAllObjects];
-                 NSError *err;
-                 NSData *jsonData = [[args firstObject] dataUsingEncoding:NSUTF8StringEncoding];
-                 NSArray *musicArr = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
-                 for (NSDictionary *dic in musicArr) {
-                     Room *room = [[Room alloc] initWithDictionary:dic];
-                     [[DataManager shareInstance].musicLists addObject:room];
-                 }
+                 NSError *jsonError;
+                 NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[[args firstObject] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:&jsonError];
+                 Recent *recent = [[Recent alloc] initWithDictionary:dic];
+                 [[DataManager shareInstance].recentChats addObject:recent];
              }
          }];
         [self.socketIO on:@"room" callback: ^(SIOParameterArray *args)
          {
              if (self.delegate && [self.delegate respondsToSelector:@selector(socketIO:callBackRoomString:)]) {
                  [self.delegate socketIO:self.socketIO callBackRoomString:[args firstObject]];
+             }else{
+                 
              }
          }];
         self.socketIO.onError = ^(NSDictionary *errorInfo){

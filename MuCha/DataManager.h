@@ -18,6 +18,7 @@
 @interface DataManager : NSObject
 @property (strong, nonatomic) NSMutableArray *topMusics;
 @property (strong, nonatomic) NSMutableArray *musicLists;
+@property (strong, nonatomic) NSMutableArray *recentChats;
 @property (strong, nonatomic) id<DataManagerDelegate> delegate;
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSString *avatarUrl;

@@ -35,6 +35,7 @@
 #pragma mark Service Manager Delegate
 
 - (void)socketIO:(SIOSocket *)socket callBackString:(NSString *)messeage{
+    NSLog(@"%@", messeage);
     NSError *jsonError;
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[messeage dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:&jsonError];
     Message *mess = [[Message alloc] initWithDictionary:dic];

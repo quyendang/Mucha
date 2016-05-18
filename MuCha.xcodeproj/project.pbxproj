@@ -42,11 +42,13 @@
 		4A27574B1CE4D3BB007DFD01 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A27574A1CE4D3BB007DFD01 /* Room.m */; };
 		4A63AFF61CDDBD470072C4F8 /* ServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A63AFF51CDDBD470072C4F8 /* ServiceManager.m */; };
 		4A93BFE91CE9B91300563B4E /* music_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A93BFE81CE9B91300563B4E /* music_placeholder.png */; };
+		4AA629A71CEB77E3002D845F /* Recent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA629A61CEB77E3002D845F /* Recent.m */; };
 		4AAB8B731CDD0E0100223613 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAB8B721CDD0E0100223613 /* FriendTableViewCell.m */; };
 		4AAB8B761CDD0ED100223613 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AAB8B751CDD0ED100223613 /* Friend.m */; };
 		4AADBB741CE5AE4F003EC261 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4AADBB701CE5AE28003EC261 /* Lato-Hairline.ttf */; };
 		4AADBB751CE5AE4F003EC261 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4AADBB711CE5AE28003EC261 /* Lato-Light.ttf */; };
 		4AADBB761CE5AE4F003EC261 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4AADBB721CE5AE28003EC261 /* Lato-Thin.ttf */; };
+		4ACFF9AE1CEAD4880011BACC /* img_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4ACFF9AD1CEAD4880011BACC /* img_background.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +106,8 @@
 		4A63AFF51CDDBD470072C4F8 /* ServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceManager.m; sourceTree = "<group>"; };
 		4A7D85D81CE385E10066B884 /* MuCha-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MuCha-Bridging-Header.h"; sourceTree = "<group>"; };
 		4A93BFE81CE9B91300563B4E /* music_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_placeholder.png; sourceTree = "<group>"; };
+		4AA629A51CEB77E3002D845F /* Recent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recent.h; sourceTree = "<group>"; };
+		4AA629A61CEB77E3002D845F /* Recent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recent.m; sourceTree = "<group>"; };
 		4AAB8B711CDD0E0100223613 /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		4AAB8B721CDD0E0100223613 /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		4AAB8B741CDD0ED100223613 /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 		4AADBB701CE5AE28003EC261 /* Lato-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Hairline.ttf"; sourceTree = "<group>"; };
 		4AADBB711CE5AE28003EC261 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		4AADBB721CE5AE28003EC261 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
+		4ACFF9AD1CEAD4880011BACC /* img_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_background.jpg; sourceTree = "<group>"; };
 		A658DB02599E12CCA2371845 /* Pods-MuCha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MuCha.release.xcconfig"; path = "Pods/Target Support Files/Pods-MuCha/Pods-MuCha.release.xcconfig"; sourceTree = "<group>"; };
 		DEC1E7C5AEA834433967A5D9 /* Pods-MuCha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MuCha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MuCha/Pods-MuCha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,6 +207,7 @@
 		489DB2531CD616170074B0E2 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				4ACFF9AD1CEAD4880011BACC /* img_background.jpg */,
 				4A93BFE81CE9B91300563B4E /* music_placeholder.png */,
 				489DB2701CD7356A0074B0E2 /* icon_logo.png */,
 				489DB2611CD62EEC0074B0E2 /* icon_back.png */,
@@ -253,6 +259,8 @@
 				4AAB8B751CDD0ED100223613 /* Friend.m */,
 				4A2757491CE4D3BB007DFD01 /* Room.h */,
 				4A27574A1CE4D3BB007DFD01 /* Room.m */,
+				4AA629A51CEB77E3002D845F /* Recent.h */,
+				4AA629A61CEB77E3002D845F /* Recent.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -350,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AADBB741CE5AE4F003EC261 /* Lato-Hairline.ttf in Resources */,
+				4ACFF9AE1CEAD4880011BACC /* img_background.jpg in Resources */,
 				4AADBB751CE5AE4F003EC261 /* Lato-Light.ttf in Resources */,
 				4AADBB761CE5AE4F003EC261 /* Lato-Thin.ttf in Resources */,
 				4A02A39D1CE05CD900EDC8C5 /* server in Resources */,
@@ -428,6 +437,7 @@
 				4A2757411CE48B01007DFD01 /* ChatTableViewCell.m in Sources */,
 				4AAB8B761CDD0ED100223613 /* Friend.m in Sources */,
 				4A27573E1CE4884E007DFD01 /* ChatViewController.m in Sources */,
+				4AA629A71CEB77E3002D845F /* Recent.m in Sources */,
 				489DB2651CD63F470074B0E2 /* DataManager.m in Sources */,
 				489DB2181CD605EA0074B0E2 /* ViewController.m in Sources */,
 				489DB22F1CD6110D0074B0E2 /* ConnectViewController.m in Sources */,

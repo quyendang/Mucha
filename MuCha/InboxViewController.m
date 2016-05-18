@@ -10,10 +10,13 @@
 #import "ServiceManager.h"
 #import "DataManager.h"
 #import "Room.h"
+#import "Recent.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
-@interface InboxViewController () <ServiceManagerDelegate>
+@interface InboxViewController () <ServiceManagerDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextView *tnText;
 @property (weak, nonatomic) IBOutlet UILabel *inbox;
+@property (weak, nonatomic) IBOutlet UITableView *inboxTableView;
 
 @end
 
@@ -27,8 +30,40 @@
     [self.tabBarController.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
     [ServiceManager shareInstance].delegate = self;
+    self.inboxTableView.delegate = self;
+    self.inboxTableView.dataSource = self;
     [[DataManager shareInstance] getUserAvataUrl];
     // Do any additional setup after loading the view.
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [DataManager shareInstance].recentChats.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    Recent *item = [[DataManager shareInstance].recentChats objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inbox"];
+    cell.detailTextLabel.text = item.lastMessage;
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:[NSString stringWithFormat:@"/%@", item.userId]
+                                  parameters:@{ @"fields" : @"id,name,picture.width(100).height(100)"}
+                                  HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+        cell.textLabel.text = [result valueForKey:@"name"];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[[result valueForKey:@"picture"] valueForKey:@"data"] valueForKey:@"url"]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [cell setNeedsLayout];
+        }];
+    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+    });
+    return cell;
 }
 
 - (void)socketIO:(SIOSocket *)socket callBackString:(NSString *)messeage{
@@ -52,6 +87,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tabBarController.navigationController setNavigationBarHidden:NO animated:YES];
     self.tabBarController.navigationItem.backBarButtonItem = nil;
     self.tabBarController.navigationItem.hidesBackButton = YES;
     self.tabBarController.title = @"Recents";
@@ -63,18 +99,9 @@
         [[ServiceManager shareInstance] connectToHostWithToken:[DataManager shareInstance].token];
     }
     
-}
-
-- (IBAction)sendClick:(id)sender {
-    NSMutableDictionary *mess = [[NSMutableDictionary alloc] init];
-    [mess setValue:@"837004196443415" forKey:@"userid"];
-    [mess setValue:@"Xin Chao!" forKey:@"message"];
-    NSError *er;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:mess options:NSJSONWritingPrettyPrinted error:&er];
-    NSString *tn = [[NSString alloc] initWithData:data encoding:NSJSONReadingAllowFragments
-                    ];
-    NSLog(@"%@", tn);
-    [[ServiceManager shareInstance] sendMessage:@"{\"senderid\" : \"323456566545\", \"userid\" : \"837004196443415\",\"message\" : \"Xin Chao!\"}"];
+    
+    [self.inboxTableView reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning {
