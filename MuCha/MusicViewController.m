@@ -32,7 +32,7 @@
     self.musicTableView.dataSource = self;
     self.searchTextField.delegate = self;
     self.searchTextField.returnKeyType = UIReturnKeySearch;
-    self.activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:DGActivityIndicatorAnimationTypeCookieTerminator tintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
+    self.activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:DGActivityIndicatorAnimationTypeCookieTerminator tintColor:[UIColor colorWithRed:142 / 255.0f green:68 / 255.0f blue:173 / 255.0f alpha:1]];
     CGFloat width = self.view.bounds.size.width / 5.0f;
     CGFloat height = self.view.bounds.size.height / 7.0f;
     self.activityIndicatorView.frame = CGRectMake(20.0f, 20.0f, width, height);

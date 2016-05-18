@@ -27,8 +27,8 @@
     [DataManager shareInstance].musicLists = [[NSMutableArray alloc] init];
     [self.tabBarController.navigationController.navigationBar setTranslucent:NO];
     self.tabBarController.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
-    [self.tabBarController.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
-    [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
+    [self.tabBarController.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:142 / 255.0f green:68 / 255.0f blue:173 / 255.0f alpha:1]];
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:142 / 255.0f green:68 / 255.0f blue:173 / 255.0f alpha:1]];
     [ServiceManager shareInstance].delegate = self;
     self.inboxTableView.delegate = self;
     self.inboxTableView.dataSource = self;

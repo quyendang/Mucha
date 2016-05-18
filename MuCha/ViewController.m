@@ -16,6 +16,8 @@
 
 @end
 
+
+
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -23,7 +25,7 @@
     [self.navigationController.navigationBar setTranslucent:NO];
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
     
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:22/255.0f green:160/255.0f blue:33/255.0f alpha:1]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:142 / 255.0f green:68 / 255.0f blue:173 / 255.0f alpha:1]];
     self.loginFBButton.delegate = self;
     self.loginFBButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
 }
