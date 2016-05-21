@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+    <entity name="MessageInbox" representedClassName="MessageInbox" syncable="YES">
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roomid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="RecentInbox" representedClassName="RecentInbox" syncable="YES">
+        <attribute name="lastmessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roomid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="useravatar" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="RecentInbox" positionX="-45" positionY="0" width="128" height="120"/>
+        <element name="MessageInbox" positionX="-18" positionY="63" width="128" height="90"/>
+    </elements>
+</model>
