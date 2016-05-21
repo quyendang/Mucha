@@ -118,14 +118,18 @@ io.on('connection', function (socket) {
       socket.on('chat', function(msg){
                 console.log(msg);
                 var t = JSON.parse(msg);
-                if(clients[t['userid']] == null){
-                    console.log(t['userid'] + ' have leave socket connect!');
-                }
-                else{
-                    io.sockets.connected[clients[t['userid']].socketid].emit('chat', msg);
-                    io.sockets.connected[socket.id].emit('chat', msg);
-                }
-                
+				if(t['userid'] != null){
+						if(clients[t['userid']] == null){
+						console.log(t['userid'] + ' have leave socket connect!');
+					}
+					else{
+						io.sockets.connected[clients[t['userid']].socketid].emit('chat', msg);
+						io.sockets.connected[socket.id].emit('chat', msg);
+					}
+				}
+				else{
+					console.log('cant find user');
+				}
             });
       
       socket.on('createroom', function(data){

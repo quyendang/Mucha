@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "Music.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Message.h"
+#import "Recent.h"
 @class DataManager;
 @protocol DataManagerDelegate <NSObject>
 
@@ -30,4 +32,12 @@
 - (void)getUserToken;
 - (void)getUserAvataUrl;
 - (Music *)musicById:(NSString *)musicId;
+- (void)getRecentMessage;
+#pragma mark Core data
+
+- (NSArray *)getAllRooms;
+- (void)addMessage:(Message *)message;
+- (void)addNewRoom:(Recent *)recent;
+- (void)deleteRoomById:(NSString *)iD;
+- (void)updateLastMessage:(Recent *)message;
 @end

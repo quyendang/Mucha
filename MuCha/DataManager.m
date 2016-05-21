@@ -7,6 +7,8 @@
 //
 
 #import "DataManager.h"
+#import "AppDelegate.h"
+#import "RecentInbox.h"
 
 @implementation DataManager
 + (DataManager *)shareInstance{
@@ -19,7 +21,7 @@
 
 - (void)getConnectTokenFromAccessToken:(NSString *)token{
     NSDictionary *req = [NSDictionary dictionaryWithObject:token forKey:@"accessToken"];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://quyen23.cloudapp.net:3000/api/login"]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://quyendang5454.cloudapp.net:3000/api/login"]];
     [request setHTTPMethod:@"POST"];
     NSData *datapost = [NSJSONSerialization dataWithJSONObject:req options:0 error:nil];
     [request setHTTPBody:datapost];
@@ -85,6 +87,73 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(completeLoadData)]){
         [self.delegate completeLoadData];
     }
+}
+
+
+- (void)getRecentMessage{
+    self.recentChats = [[NSMutableArray alloc] init];
+    NSArray *chats = [self getAllRooms];
+    //NSLog(@"%@", chats);
+    for (RecentInbox *ob in chats) {
+        //[context delete:ob];
+       // [context save:nil];
+        Recent *rc = [[Recent alloc] initWithDB:ob];
+        [self.recentChats addObject:rc];
+    }
+}
+#pragma mark Core data
+
+#pragma mark Room Function
+- (NSArray *)getAllRooms{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSArray *rooms = [[NSArray alloc] init];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"RecentInbox"];
+    //NSPredicate * predicate = [NSPredicate predicateWithFormat:@"gioiTinh = 1"];
+    //request.predicate = predicate;
+    
+    NSError *error;
+    rooms = [context executeFetchRequest:request error:&error];
+    return rooms;
+}
+
+- (void)addMessage:(Message *)message{
+    
+}
+
+- (void)addNewRoom:(Recent *)recent{
+    
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"RecentInbox"];
+    request.predicate = [NSPredicate predicateWithFormat:@"roomid=%@", recent.roomId];
+    if ([context executeFetchRequest:request error:nil].count == 0) {
+        RecentInbox *rc = [NSEntityDescription insertNewObjectForEntityForName:@"RecentInbox" inManagedObjectContext:context];
+        [rc initWithRecent:recent];
+        [context save:nil];
+    }else{
+        RecentInbox *rc = [context executeFetchRequest:request error:nil].firstObject;
+        [rc initWithRecent:recent];
+        [context save:nil];
+    }
+}
+
+- (void)deleteRoomById:(NSString *)iD{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"RecentInbox"];
+    request.predicate = [NSPredicate predicateWithFormat:@"roomid=%@", iD];
+    RecentInbox *rc = [context executeFetchRequest:request error:nil].firstObject;
+    [context delete:rc];
+    [context save:nil];
+}
+
+
+
+
+#pragma mark - Helper
+- (NSManagedObjectContext *)managedObjectContext {
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    return appDelegate.managedObjectContext;
 }
 
 @end

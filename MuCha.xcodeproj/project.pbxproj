@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		363974271DFF97EF300D0169 /* libPods-MuCha.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40F56D89EB353E157A4C4C3D /* libPods-MuCha.a */; };
+		480E80A51CECEF0A005E78D4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 480E80A41CECEF0A005E78D4 /* CoreData.framework */; };
+		480E80C71CECF223005E78D4 /* MuchaModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 480E80C51CECF223005E78D4 /* MuchaModel.xcdatamodeld */; };
+		480E80D01CECF2AA005E78D4 /* MessageInbox+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 480E80C91CECF2AA005E78D4 /* MessageInbox+CoreDataProperties.m */; };
+		480E80D11CECF2AA005E78D4 /* MessageInbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 480E80CB1CECF2AA005E78D4 /* MessageInbox.m */; };
+		480E80D21CECF2AA005E78D4 /* RecentInbox+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 480E80CD1CECF2AA005E78D4 /* RecentInbox+CoreDataProperties.m */; };
+		480E80D31CECF2AA005E78D4 /* RecentInbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 480E80CF1CECF2AA005E78D4 /* RecentInbox.m */; };
 		489DB2121CD605EA0074B0E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 489DB2111CD605EA0074B0E2 /* main.m */; };
 		489DB2151CD605EA0074B0E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 489DB2141CD605EA0074B0E2 /* AppDelegate.m */; };
 		489DB2181CD605EA0074B0E2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489DB2171CD605EA0074B0E2 /* ViewController.m */; };
@@ -53,6 +59,16 @@
 
 /* Begin PBXFileReference section */
 		40F56D89EB353E157A4C4C3D /* libPods-MuCha.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MuCha.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		480E80A41CECEF0A005E78D4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		480E80C61CECF223005E78D4 /* MuchaModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MuchaModel.xcdatamodel; sourceTree = "<group>"; };
+		480E80C81CECF2AA005E78D4 /* MessageInbox+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MessageInbox+CoreDataProperties.h"; sourceTree = "<group>"; };
+		480E80C91CECF2AA005E78D4 /* MessageInbox+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MessageInbox+CoreDataProperties.m"; sourceTree = "<group>"; };
+		480E80CA1CECF2AA005E78D4 /* MessageInbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInbox.h; sourceTree = "<group>"; };
+		480E80CB1CECF2AA005E78D4 /* MessageInbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInbox.m; sourceTree = "<group>"; };
+		480E80CC1CECF2AA005E78D4 /* RecentInbox+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecentInbox+CoreDataProperties.h"; sourceTree = "<group>"; };
+		480E80CD1CECF2AA005E78D4 /* RecentInbox+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecentInbox+CoreDataProperties.m"; sourceTree = "<group>"; };
+		480E80CE1CECF2AA005E78D4 /* RecentInbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentInbox.h; sourceTree = "<group>"; };
+		480E80CF1CECF2AA005E78D4 /* RecentInbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentInbox.m; sourceTree = "<group>"; };
 		489DB20D1CD605EA0074B0E2 /* MuCha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuCha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		489DB2111CD605EA0074B0E2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		489DB2131CD605EA0074B0E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -125,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				480E80A51CECEF0A005E78D4 /* CoreData.framework in Frameworks */,
 				489DB26D1CD7317D0074B0E2 /* FBSDKLoginKit.framework in Frameworks */,
 				489DB26C1CD7317D0074B0E2 /* FBSDKCoreKit.framework in Frameworks */,
 				489DB26E1CD7317D0074B0E2 /* FBSDKShareKit.framework in Frameworks */,
@@ -135,6 +152,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		480E80B21CECF0E6005E78D4 /* ModelCoreData */ = {
+			isa = PBXGroup;
+			children = (
+				4A7D85D81CE385E10066B884 /* MuCha-Bridging-Header.h */,
+				480E80C51CECF223005E78D4 /* MuchaModel.xcdatamodeld */,
+				480E80C81CECF2AA005E78D4 /* MessageInbox+CoreDataProperties.h */,
+				480E80C91CECF2AA005E78D4 /* MessageInbox+CoreDataProperties.m */,
+				480E80CA1CECF2AA005E78D4 /* MessageInbox.h */,
+				480E80CB1CECF2AA005E78D4 /* MessageInbox.m */,
+				480E80CC1CECF2AA005E78D4 /* RecentInbox+CoreDataProperties.h */,
+				480E80CD1CECF2AA005E78D4 /* RecentInbox+CoreDataProperties.m */,
+				480E80CE1CECF2AA005E78D4 /* RecentInbox.h */,
+				480E80CF1CECF2AA005E78D4 /* RecentInbox.m */,
+			);
+			name = ModelCoreData;
+			sourceTree = "<group>";
+		};
 		489DB2041CD605EA0074B0E2 = {
 			isa = PBXGroup;
 			children = (
@@ -170,7 +204,7 @@
 				489DB25E1CD62AA70074B0E2 /* Cells */,
 				4A2757451CE48DA7007DFD01 /* ViewModel */,
 				4A63AFF71CDDBD4F0072C4F8 /* Managers */,
-				4A7D85D81CE385E10066B884 /* MuCha-Bridging-Header.h */,
+				480E80B21CECF0E6005E78D4 /* ModelCoreData */,
 			);
 			path = MuCha;
 			sourceTree = "<group>";
@@ -240,6 +274,7 @@
 		489DB26F1CD731830074B0E2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				480E80A41CECEF0A005E78D4 /* CoreData.framework */,
 				489DB2691CD7317D0074B0E2 /* FBSDKCoreKit.framework */,
 				489DB26A1CD7317D0074B0E2 /* FBSDKLoginKit.framework */,
 				489DB26B1CD7317D0074B0E2 /* FBSDKShareKit.framework */,
@@ -435,12 +470,15 @@
 			files = (
 				489DB2581CD624830074B0E2 /* MusicViewController.m in Sources */,
 				4A2757411CE48B01007DFD01 /* ChatTableViewCell.m in Sources */,
+				480E80D01CECF2AA005E78D4 /* MessageInbox+CoreDataProperties.m in Sources */,
 				4AAB8B761CDD0ED100223613 /* Friend.m in Sources */,
 				4A27573E1CE4884E007DFD01 /* ChatViewController.m in Sources */,
 				4AA629A71CEB77E3002D845F /* Recent.m in Sources */,
+				480E80D21CECF2AA005E78D4 /* RecentInbox+CoreDataProperties.m in Sources */,
 				489DB2651CD63F470074B0E2 /* DataManager.m in Sources */,
 				489DB2181CD605EA0074B0E2 /* ViewController.m in Sources */,
 				489DB22F1CD6110D0074B0E2 /* ConnectViewController.m in Sources */,
+				480E80D11CECF2AA005E78D4 /* MessageInbox.m in Sources */,
 				4A63AFF61CDDBD470072C4F8 /* ServiceManager.m in Sources */,
 				489DB2151CD605EA0074B0E2 /* AppDelegate.m in Sources */,
 				4A2757481CE4D312007DFD01 /* ConectTableViewCell.m in Sources */,
@@ -451,8 +489,10 @@
 				4A2757441CE48D9D007DFD01 /* Message.m in Sources */,
 				489DB2321CD6111E0074B0E2 /* ProfileViewController.m in Sources */,
 				489DB2121CD605EA0074B0E2 /* main.m in Sources */,
+				480E80C71CECF223005E78D4 /* MuchaModel.xcdatamodeld in Sources */,
 				4A27574B1CE4D3BB007DFD01 /* Room.m in Sources */,
 				489DB2291CD610DC0074B0E2 /* InboxViewController.m in Sources */,
+				480E80D31CECF2AA005E78D4 /* RecentInbox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +665,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		480E80C51CECF223005E78D4 /* MuchaModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				480E80C61CECF223005E78D4 /* MuchaModel.xcdatamodel */,
+			);
+			currentVersion = 480E80C61CECF223005E78D4 /* MuchaModel.xcdatamodel */;
+			path = MuchaModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 489DB2051CD605EA0074B0E2 /* Project object */;
 }

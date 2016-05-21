@@ -25,8 +25,7 @@
 }
 
 - (void)connectToHostWithToken:(NSString *)token{
-    [DataManager shareInstance].recentChats = [[NSMutableArray alloc] init];
-    [SIOSocket socketWithHost:[NSString stringWithFormat:@"http://quyen23.cloudapp.net:3000/?token=%@", token] response: ^(SIOSocket *socket) {
+    [SIOSocket socketWithHost:[NSString stringWithFormat:@"http://quyendang5454.cloudapp.net:3000/?token=%@", token] response: ^(SIOSocket *socket) {
         self.socketIO = socket;
         self.socketIO.onConnect = ^(){
             NSLog(@"User connected");
@@ -41,7 +40,9 @@
                  NSError *jsonError;
                  NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[[args firstObject] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:&jsonError];
                  Recent *recent = [[Recent alloc] initWithDictionary:dic];
+                 [[DataManager shareInstance] addNewRoom:recent];
                  [[DataManager shareInstance].recentChats addObject:recent];
+                 
              }
          }];
         [self.socketIO on:@"room" callback: ^(SIOParameterArray *args)

@@ -12,6 +12,7 @@
 #import "Room.h"
 #import "Recent.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "FriendTableViewCell.h"
 
 @interface InboxViewController () <ServiceManagerDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextView *tnText;
@@ -33,6 +34,7 @@
     self.inboxTableView.delegate = self;
     self.inboxTableView.dataSource = self;
     [[DataManager shareInstance] getUserAvataUrl];
+    [[DataManager shareInstance] getRecentMessage];
     // Do any additional setup after loading the view.
 }
 
@@ -46,8 +48,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     Recent *item = [[DataManager shareInstance].recentChats objectAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inbox"];
-    cell.detailTextLabel.text = item.lastMessage;
+    FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inbox"];
+    cell.statusLabel.text = item.lastMessage;
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                   initWithGraphPath:[NSString stringWithFormat:@"/%@", item.userId]
                                   parameters:@{ @"fields" : @"id,name,picture.width(100).height(100)"}
@@ -55,8 +57,10 @@
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                           id result,
                                           NSError *error) {
-        cell.textLabel.text = [result valueForKey:@"name"];
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[[result valueForKey:@"picture"] valueForKey:@"data"] valueForKey:@"url"]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        cell.nameLabel.text = [result valueForKey:@"name"];
+        [cell.avataImageView sd_setImageWithURL:[NSURL URLWithString:[[[result valueForKey:@"picture"] valueForKey:@"data"] valueForKey:@"url"]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            cell.avataImageView.layer.cornerRadius = cell.avataImageView.layer.frame.size.width / 2;
+            cell.avataImageView.clipsToBounds = YES;
             [cell setNeedsLayout];
         }];
     }];
