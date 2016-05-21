@@ -62,7 +62,7 @@
     NSString *cellStyle = [mess.senderID isEqualToString:self.fr.userID] ? @"input_cell" : @"output_cell";
     ChatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStyle];
     cell.messageTextView.text = mess.message;
-    cell.messageTextView.layer.cornerRadius = 30;
+    cell.messageTextView.layer.cornerRadius = 25;
     cell.messageTextView.clipsToBounds = YES;
     [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[mess.senderID isEqualToString:self.fr.userID] ? self.fr.userPicture : [DataManager shareInstance].avatarUrl] placeholderImage:[UIImage imageNamed:@"music_placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         cell.avatarImageView.layer.cornerRadius = 25;
@@ -89,10 +89,6 @@
     [textField endEditing:YES];
     [[ServiceManager shareInstance] sendMessage:[NSString stringWithFormat:@"{\"senderid\" : \"%@\", \"userid\" : \"%@\",\"message\" : \"%@\"}", [FBSDKAccessToken currentAccessToken].userID, self.fr.userID, textField.text]];
     textField.text = @"";
-    Message *mess = [[Message alloc] init];
-    mess.userID = @"gyaggaygsdyaugsyuaasasa";
-    mess.message = @"GVYHBJSNAJKSNAs";
-    [self.chatArrs addObject:mess];
     return YES;
 }
 
