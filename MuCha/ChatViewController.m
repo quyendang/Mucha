@@ -43,6 +43,8 @@
     [self.chatArrs addObject:mess];
     dispatch_sync(dispatch_get_main_queue(), ^{
         [self.chatTableView reloadData];
+        NSIndexPath *index = [NSIndexPath indexPathForRow:[self.chatTableView numberOfRowsInSection:0] - 1 inSection:0];
+        [self.chatTableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     });
 }
 
