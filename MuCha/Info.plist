@@ -5,7 +5,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Hairline.ttf</string>
-		<string>Lato-Light.ttf</string>
+		<string>Lato-Ligh.ttf</string>
 		<string>Lato-Thin.ttf</string>
 	</array>
 	<key>NSAppTransportSecurity</key>

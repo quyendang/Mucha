@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avataImageView;
 @property (weak, nonatomic) IBOutlet FBSDKButton *logoutButton;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *avata;
 
 @end
 
@@ -23,6 +24,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIImage *image = [UIImage imageNamed:@"bubbleReceive"];
+    image = [self tintImage:image withColor:[UIColor redColor]];
+    [image resizableImageWithCapInsets:UIEdgeInsetsMake(17, 27, 21, 17)];
+    self.avata.image = image;
     if ([FBSDKAccessToken currentAccessToken]) {
         [[[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,name,picture.width(100).height(100)"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
             if (!error) {
@@ -37,6 +42,21 @@
             }
         }];
     }
+}
+- (UIImage *)tintImage:(UIImage *)image withColor:(UIColor *)color
+{
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, 0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+    CGContextClipToMask(context, rect, image.CGImage);
+    [color setFill];
+    CGContextFillRect(context, rect);
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{

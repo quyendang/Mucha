@@ -12,6 +12,7 @@
 #import "ChatTableViewCell.h"
 #import "Message.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "NSString+Cal.h"
 
 
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, ServiceManagerDelegate, UITextFieldDelegate>
@@ -59,23 +60,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     Message *mess = [self.chatArrs objectAtIndex:indexPath.row];
-    NSString *cellStyle = [mess.senderID isEqualToString:self.fr.userID] ? @"input_cell" : @"output_cell";
-    ChatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStyle];
+    ChatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message_cell"];
+    
+    
+    
+    
+    CGSize size = [mess.message usedSizeForMaxWidth:200.0f withFont:[UIFont fontWithName:@"Lato-Thin" size:17.0f]];
+    if (!cell) {
+        cell = [[ChatTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"message_cell" maxSize:size messageType:[mess.senderID isEqualToString:self.fr.userID]];
+    }
+    
     cell.messageTextView.text = mess.message;
-    cell.messageTextView.layer.cornerRadius = 25;
-    cell.messageTextView.clipsToBounds = YES;
-    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[mess.senderID isEqualToString:self.fr.userID] ? self.fr.userPicture : [DataManager shareInstance].avatarUrl] placeholderImage:[UIImage imageNamed:@"music_placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        cell.avatarImageView.layer.cornerRadius = 25;
-        cell.avatarImageView.clipsToBounds = YES;
+    cell.messageTextView.font = [UIFont fontWithName:@"Lato-Thin" size:17.0f];
+    [cell.userImage sd_setImageWithURL:[NSURL URLWithString:[mess.senderID isEqualToString:self.fr.userID] ? self.fr.userPicture : [DataManager shareInstance].avatarUrl] placeholderImage:[UIImage imageNamed:@"music_placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [cell setNeedsLayout];
     }];
     return cell;
 }
-/*
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ChatTableViewCell *cell = [self.chatTableView cellForRowAtIndexPath:indexPath];
-    return cell.messageTextView.layer.frame.size.height + 10.0f;
-}*/
+    //ChatTableViewCell *cell = [self.chatTableView cellForRowAtIndexPath:indexPath];
+    Message *mess = [self.chatArrs objectAtIndex:indexPath.row];
+    CGSize size = [mess.message usedSizeForMaxWidth:200.0f withFont:[UIFont fontWithName:@"Lato-Thin" size:17.0f]];
+    return size.height + 30.0f;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    return NO;
+}
 
 - (void)textViewDidChange:(UITextView *)textView{
     CGFloat fixedWidth = textView.frame.size.width;
@@ -88,6 +100,8 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
     [[ServiceManager shareInstance] sendMessage:[NSString stringWithFormat:@"{\"senderid\" : \"%@\", \"userid\" : \"%@\",\"message\" : \"%@\"}", [FBSDKAccessToken currentAccessToken].userID, self.fr.userID, textField.text]];
+    //NSLog(@"w: %f h : %f", [textField.text usedSizeForMaxWidth:250.0f withFont:[UIFont fontWithName:@"" size:17.0f]].width, [textField.text usedSizeForMaxWidth:250.0f withFont:[UIFont fontWithName:@"" size:17.0f]].height);
+    
     textField.text = @"";
     return YES;
 }

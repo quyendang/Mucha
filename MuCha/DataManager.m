@@ -21,7 +21,7 @@
 
 - (void)getConnectTokenFromAccessToken:(NSString *)token{
     NSDictionary *req = [NSDictionary dictionaryWithObject:token forKey:@"accessToken"];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://quyendang5454.cloudapp.net:3000/api/login"]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://fptdilinh.net:3000/api/login"]];
     [request setHTTPMethod:@"POST"];
     NSData *datapost = [NSJSONSerialization dataWithJSONObject:req options:0 error:nil];
     [request setHTTPBody:datapost];

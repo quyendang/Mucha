@@ -25,7 +25,7 @@
 }
 
 - (void)connectToHostWithToken:(NSString *)token{
-    [SIOSocket socketWithHost:[NSString stringWithFormat:@"http://quyendang5454.cloudapp.net:3000/?token=%@", token] response: ^(SIOSocket *socket) {
+    [SIOSocket socketWithHost:[NSString stringWithFormat:@"http://fptdilinh.net:3000/?token=%@", token] response: ^(SIOSocket *socket) {
         self.socketIO = socket;
         self.socketIO.onConnect = ^(){
             NSLog(@"User connected");

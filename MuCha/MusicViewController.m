@@ -40,13 +40,13 @@
     [self.activityIndicatorView startAnimating];
 }
 
-- (void)socketIO:(SIOSocket *)socket callBackRoomString:(NSString *)data{
+- (void)socketIO:(SIOSocket *)socket callBackRoomString:(NSArray *)data{
     NSLog(@"%@", data);
     [[DataManager shareInstance].musicLists removeAllObjects];
-    NSError *err;
-    NSData *jsonData = [data dataUsingEncoding:NSUTF8StringEncoding];
-    NSArray *musicArr = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
-    for (NSDictionary *dic in musicArr) {
+    //NSError *err;
+    //NSData *jsonData = [data dataUsingEncoding:NSUTF8StringEncoding];
+    //NSArray *musicArr = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+    for (NSDictionary *dic in data) {
         Room *room = [[Room alloc] initWithDictionary:dic];
         [[DataManager shareInstance].musicLists addObject:room];
     }

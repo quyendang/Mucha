@@ -13,7 +13,7 @@
 @protocol ServiceManagerDelegate <NSObject>
 
 - (void)socketIO:(SIOSocket *)socket callBackString:(NSString *)messeage;
-- (void)socketIO:(SIOSocket *)socket callBackRoomString:(NSString *)data;
+- (void)socketIO:(SIOSocket *)socket callBackRoomString:(NSArray *)data;
 @end
 @interface ServiceManager : NSObject
 @property (strong, nonatomic) SIOSocket *socketIO;
